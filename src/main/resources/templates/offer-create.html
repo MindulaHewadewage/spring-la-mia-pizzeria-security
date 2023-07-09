@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${offerta}">
+	<h1>Create a new Offer:</h1>
+	<form action="/offers/create" method="POST">
+		<input type="text" name="pizza" th:value="*{pizza.id}" hidden>
+		<label>Title</label>
+		<input type="text" name="title" th:value="*{title}">
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('title')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('title').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Start Date:</label>
+		<input type="date" name="startDate" th:value="*{startDate}">
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('startDate')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('startDate').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Finish Date:</label>
+		<input type="date" name="finishDate" th:value="*{finishDate}">
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('finishDate')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('finishDate').defaultMessage} ]]
+		</label>
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('startDateBeforefinishDate')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			<br>
+			[[ *{getFieldError('startDateBeforefinishDate').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Discount of :</label>
+		<input type="number" name="discountPerc" th:value="*{discountPerc}">
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('discountPerc')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('discountPerc').defaultMessage} ]]
+		</label>
+		<br>
+		<input type="submit" value="CREATE">
+	</form>
+</body>
+</html>
